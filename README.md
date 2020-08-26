@@ -77,13 +77,20 @@ WAS INSTALLED CORRECTLY BEFORE SHIPPING THE CODE TO PRODUCTION
 
   - Execute `php bin/magento setup:upgrade`
 
-  - Execute `php bin/magento static:content:deploy`
+  - Optional `php bin/magento setup:static-content:deploy`
 
   - Execute `php bin/magento setup:di:compile`
 
   - Execute `php bin/magento cache:clean`
 
   - Execute `php bin/magento cron:run` three times
+
+  - Optional if you are not the owner of Magento files:
+	  `chmod -R 755 ./`
+	  `chmod -R 777 var/`
+	  `chmod -R 777 pub/`
+	  `chmod -R 777 app/etc`
+	  `chmod -R 777 generated`
 
 7. Upon successful installation, login to your Magento Admin panel.
 
