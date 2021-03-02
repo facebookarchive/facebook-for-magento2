@@ -1,0 +1,12 @@
+name: Magento 2 Static Test Action
+on: [push, pull_request]
+jobs:
+  build:
+    name: shankar/magento2-static-test-action
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@master
+
+      - name: Magento 2 Static Test
+        uses: konarshankar07/magento2-static-test-action@v1.0.0
