@@ -15,6 +15,7 @@ class Config
     const XML_PATH_FACEBOOK_COLLECTIONS_SYNC_IS_ACTIVE = 'facebook/catalog_management/collections_sync';
 
     const XML_PATH_FACEBOOK_INVENTORY_SOURCE = 'facebook/inventory_management/inventory_source';
+    const XML_PATH_FACEBOOK_OUT_OF_STOCK_THRESHOLD = 'facebook/inventory_management/out_of_stock_threshold';
 
     /**
      * @var StoreManagerInterface
@@ -108,5 +109,13 @@ class Config
     public function getInventorySource()
     {
         return $this->scopeConfig->getValue(self::XML_PATH_FACEBOOK_INVENTORY_SOURCE);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getOutOfStockThreshold()
+    {
+        return $this->scopeConfig->getValue(self::XML_PATH_FACEBOOK_OUT_OF_STOCK_THRESHOLD);
     }
 }
