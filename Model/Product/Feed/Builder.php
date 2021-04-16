@@ -12,7 +12,6 @@ use Facebook\BusinessExtension\Model\Product\Feed\Builder\Tools as BuilderTools;
 use Magento\Catalog\Api\Data\CategoryInterface;
 use Magento\Catalog\Model\Product;
 use Magento\Catalog\Model\ResourceModel\Category\CollectionFactory as CategoryCollectionFactory;
-use Magento\CatalogInventory\Model\Stock\Item as StockItem;
 use Magento\Framework\Exception\LocalizedException;
 
 class Builder
@@ -371,7 +370,7 @@ class Builder
             self::ATTR_SIZE                 => $this->getSize($product),
             self::ATTR_URL                  => $this->getProductUrl($product),
             self::ATTR_IMAGE_URL            => $imageUrl,
-            self::ATTR_ADDITIONAL_IMAGE_URL => implode(',', $images['additional_images']),
+            self::ATTR_ADDITIONAL_IMAGE_URL => $images['additional_images'],
         ];
 
         $this->enhancedCatalogHelper->assignECAttribute($product, $entry);
