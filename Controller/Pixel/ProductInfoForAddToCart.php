@@ -14,7 +14,6 @@ class ProductInfoForAddToCart extends \Magento\Framework\App\Action\Action
     protected $_resultJsonFactory;
     protected $_productFactory;
     protected $_fbeHelper;
-    protected $_eventManager;
     protected $_formKeyValidator;
 
     public function __construct(
@@ -22,14 +21,12 @@ class ProductInfoForAddToCart extends \Magento\Framework\App\Action\Action
         \Magento\Framework\Controller\Result\JsonFactory $resultJsonFactory,
         \Magento\Catalog\Model\ProductFactory $productFactory,
         FBEHelper $helper,
-        \Magento\Framework\Event\ManagerInterface $eventManager,
         \Magento\Framework\Data\Form\FormKey\Validator $formKeyValidator
     ) {
         parent::__construct($context);
         $this->_resultJsonFactory = $resultJsonFactory;
         $this->_productFactory = $productFactory;
         $this->_fbeHelper = $helper;
-        $this->_eventManager = $eventManager;
         $this->_formKeyValidator = $formKeyValidator;
     }
 
