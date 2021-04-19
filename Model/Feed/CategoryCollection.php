@@ -229,6 +229,7 @@ class CategoryCollection
      */
     public function pushAllCategoriesToFbCollections()
     {
+        $resArray = [];
         $access_token = $this->fbeHelper->getAccessToken();
         if ($access_token == null) {
             $this->fbeHelper->log("can't find access token, abort pushAllCategoriesToFbCollections");
@@ -241,12 +242,15 @@ class CategoryCollection
             $this->fbeHelper->log("setid for it is:". (string)$set_id);
             if ($set_id) {
                 $response = $this->updateCategoryWithFB($category, $set_id);
+                $resArray[] = $response;
                 continue;
             }
             if (!$category->hasChildren()) {
-                $this->pushNewCategoryToFB($category);
+                $response = $this->pushNewCategoryToFB($category);
+                $resArray[] = $response;
             }
         }
+        return json_encode($resArray);
     }
 
     /**
