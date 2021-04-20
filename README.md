@@ -56,11 +56,20 @@ Before installing, verify your Magento cron job is up and running, read more abo
 Login to your server instance.
 
 ### INSTALLATION
+
+#### Magento Marketplace Installation
+You can download and install our extension in [Magento marketplace](https://marketplace.magento.com/facebook-facebook-for-magento2.html) if you have a marketplace account.
 #### Composer Installation
 * Go to your magento root path
 * Execute command `cd /var/www/Magento` or
  `cd /var/www/html/Magento` based on your server Centos or Ubuntu.
 * run composer command: `composer require facebook/facebook-for-magento2`
+- To enable module execute `php bin/magento module:enable Facebook_BusinessExtension`
+- Execute `php bin/magento setup:upgrade`
+- Optional `php bin/magento setup:static-content:deploy`
+- Execute `php bin/magento setup:di:compile`
+- Execute `php bin/magento cache:clean`
+- Execute `php bin/magento cron:run` three times
 
 #### Manual Installation
 * extract files from an archive.  
@@ -70,12 +79,12 @@ Login to your server instance.
 create directory `app/code/Facebook/BusinessExtension`. If you downloaded zip from facebook, those two folders are included.
 
 
-### ENABLE EXTENSION
+##### ENABLE EXTENSION
 * Make sure you have correct read/write permissions on your Magento root directory.
     Read about them [here](https://magento.stackexchange.com/questions/91870/magento-2-folder-file-permissions).  
 * Move to magento root folder by executing command `cd ../../`
 
-####  Enable Extension By Running Script
+######  Enable Extension By Running Script
 You can install the extension with a bash script.  
 - Copy the install-facebook-business-extension.sh script to your Magento root folder.
 - Give it execute permission with `chmod +x install-facebook-business-extension.sh` (you may have to log in as root user to do it).
@@ -87,7 +96,7 @@ You can install the extension with a bash script.
 	  `chmod -R 777 pub/`    
 	  `chmod -R 777 app/etc`     
 	  `chmod -R 777 generated`  
-####  Enable Extension By Running Commands Manually
+######  Enable Extension By Running Commands Manually
 7. Execute the following commands to manually install Facebook Business Extension.
 - Install the Facebook Business SDK for PHP: `composer require facebook/php-business-sdk`. This dependency is used by the extension.
 - You will see a message similar to: `Installing facebook/php-business-sdk (8.0.0): Downloading (100%)`
