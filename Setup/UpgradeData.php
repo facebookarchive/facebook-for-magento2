@@ -254,6 +254,27 @@ class UpgradeData implements UpgradeDataInterface
                 );
             }
         }
+        // user can config if they want to sync a category or not
+        if (version_compare($context->getVersion(), '1.4.2') < 0) {
+            $attrCode = "sync_to_facebook_catalog";
+            $eavSetup->removeAttribute(Product::ENTITY, $attrCode);
+            if (!$eavSetup->getAttributeId(Product::ENTITY, $attrCode)) {
+                    $eavSetup->addAttribute(
+                        \Magento\Catalog\Model\Category::ENTITY,
+                        $attrCode,
+                        [
+                            'type'     => 'int',
+                            'input'    => 'boolean',
+                            'source'   => 'Magento\Eav\Model\Entity\Attribute\Source\Boolean',
+                            'visible'  => true,
+                            'default'  => "1",
+                            'required' => false,
+                            'global'   => \Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface::SCOPE_STORE,
+                            'group'    => 'Display Settings',
+                        ]
+                    );
+            }
+        }
 
         $setup->endSetup();
     }
