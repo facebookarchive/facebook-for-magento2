@@ -15,19 +15,22 @@ class ProductInfoForAddToCart extends \Magento\Framework\App\Action\Action
     protected $_productFactory;
     protected $_fbeHelper;
     protected $_formKeyValidator;
+    protected $_magentoDataHelper;
 
     public function __construct(
         \Magento\Framework\App\Action\Context $context,
         \Magento\Framework\Controller\Result\JsonFactory $resultJsonFactory,
         \Magento\Catalog\Model\ProductFactory $productFactory,
         FBEHelper $helper,
-        \Magento\Framework\Data\Form\FormKey\Validator $formKeyValidator
+        \Magento\Framework\Data\Form\FormKey\Validator $formKeyValidator,
+        \Facebook\BusinessExtension\Helper\MagentoDataHelper $magentoDataHelper
     ) {
         parent::__construct($context);
         $this->_resultJsonFactory = $resultJsonFactory;
         $this->_productFactory = $productFactory;
         $this->_fbeHelper = $helper;
         $this->_formKeyValidator = $formKeyValidator;
+        $this->_magentoDataHelper = $magentoDataHelper;
     }
 
     private function getCategory($product)
@@ -60,8 +63,7 @@ class ProductInfoForAddToCart extends \Magento\Framework\App\Action\Action
     private function getProductInfo($product_sku)
     {
         $response_data = [];
-        $product = $this->_productFactory->create();
-        $product->load($product->getIdBySku($product_sku));
+        $product = $this->_magentoDataHelper->getProductWithSku($product_sku);
         if ($product->getId()) {
             $response_data['id'] = $product->getId();
             $response_data['name'] = $product->getName();
