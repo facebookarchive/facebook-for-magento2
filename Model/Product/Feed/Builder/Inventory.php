@@ -94,12 +94,9 @@ class Inventory
      */
     public function getAvailability()
     {
-        if ($this->productStock && !$this->productStock->getManageStock()) {
-            return $this->productStock->getIsInStock() ? self::STATUS_IN_STOCK : self::STATUS_OUT_OF_STOCK;
-        }
-
         return $this->product && $this->productStock && $this->productStock->getIsInStock()
-        && ($this->productStock->getQty() - $this->systemConfig->getOutOfStockThreshold() > 0)
+        && ((($this->productStock->getQty() - $this->systemConfig->getOutOfStockThreshold()) > 0)
+            || !$this->productStock->getManageStock())
             ? self::STATUS_IN_STOCK : self::STATUS_OUT_OF_STOCK;
     }
 
