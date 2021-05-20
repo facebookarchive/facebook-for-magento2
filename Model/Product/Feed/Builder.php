@@ -12,7 +12,9 @@ use Facebook\BusinessExtension\Model\Product\Feed\Builder\Tools as BuilderTools;
 use Magento\Catalog\Api\Data\CategoryInterface;
 use Magento\Catalog\Model\Product;
 use Magento\Catalog\Model\ResourceModel\Category\CollectionFactory as CategoryCollectionFactory;
+use Magento\ConfigurableProduct\Model\Product\Type\Configurable;
 use Magento\Framework\Exception\LocalizedException;
+use Magento\GroupedProduct\Model\Product\Type\Grouped;
 
 class Builder
 {
