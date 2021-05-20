@@ -7,6 +7,7 @@ namespace Facebook\BusinessExtension\Model\Product\Feed\Method;
 use Facebook\BusinessExtension\Helper\FBEHelper;
 use Facebook\BusinessExtension\Model\Product\Feed\Builder;
 use Facebook\BusinessExtension\Model\Product\Feed\ProductRetriever\Configurable as ConfigurableProductRetriever;
+use Facebook\BusinessExtension\Model\Product\Feed\ProductRetriever\Grouped as GroupedProductRetriever;
 use Facebook\BusinessExtension\Model\Product\Feed\ProductRetriever\Simple as SimpleProductRetriever;
 use Facebook\BusinessExtension\Model\Product\Feed\ProductRetrieverInterface;
 use Magento\Catalog\Model\Product;
@@ -39,18 +40,21 @@ class BatchApi
     /**
      * @param FBEHelper $helper
      * @param SimpleProductRetriever $simpleProductRetriever
+     * @param GroupedProductRetriever $groupedProductRetriever
      * @param ConfigurableProductRetriever $configurableProductRetriever
      * @param Builder $builder
      */
     public function __construct(
         FBEHelper $helper,
         SimpleProductRetriever $simpleProductRetriever,
+        GroupedProductRetriever $groupedProductRetriever,
         ConfigurableProductRetriever $configurableProductRetriever,
         Builder $builder
     ) {
         $this->fbeHelper = $helper;
         $this->productRetrievers = [
             $simpleProductRetriever,
+            $groupedProductRetriever,
             $configurableProductRetriever
         ];
         $this->builder = $builder;
