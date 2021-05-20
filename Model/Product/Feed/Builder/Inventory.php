@@ -105,6 +105,9 @@ class Inventory
      */
     public function getInventory()
     {
+        if (!$this->productStock->getManageStock()) {
+            return 9999; // Fake Quantity to make product available if Manage Stock is off.
+        }
         return $this->product && $this->productStock ? (int)$this->productStock->getQty() : 0;
     }
 }
