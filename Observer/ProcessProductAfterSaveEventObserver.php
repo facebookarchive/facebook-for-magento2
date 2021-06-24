@@ -57,7 +57,7 @@ class ProcessProductAfterSaveEventObserver implements ObserverInterface
             $requestData = $this->batchApi->buildProductRequest($product);
             $requestParams = [];
             $requestParams[0] = $requestData;
-            $response = $this->fbeHelper->makeHttpRequest($requestParams, null);
+            $this->fbeHelper->makeHttpRequest($requestParams, null);
         } catch (Exception $e) {
             $this->fbeHelper->logException($e);
         }
