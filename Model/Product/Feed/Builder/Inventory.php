@@ -18,7 +18,7 @@ class Inventory
 
     const STATUS_OUT_OF_STOCK = 'out of stock';
 
-    const UNMANAGED_STOCK_QTY = 9999;
+    const DEFAULT_IN_STOCK_QTY = 9999;
 
     /**
      * @var StockItemRepositoryInterface
@@ -96,8 +96,10 @@ class Inventory
      */
     public function getAvailability()
     {
-        return $this->productStock && $this->productStock->getIsInStock()
-            && ($this->getInventory() - $this->systemConfig->getOutOfStockThreshold() > 0)
+        return $this->product
+        && $this->productStock
+        && $this->productStock->getIsInStock()
+        && ($this->getInventory() - $this->systemConfig->getOutOfStockThreshold() > 0)
             ? self::STATUS_IN_STOCK : self::STATUS_OUT_OF_STOCK;
     }
 
@@ -111,9 +113,9 @@ class Inventory
         }
 
         if (!$this->productStock->getManageStock()) {
-            return self::UNMANAGED_STOCK_QTY; // Fake Quantity to make product available if Manage Stock is off.
+            return self::DEFAULT_IN_STOCK_QTY; // Fake Quantity to make product available if Manage Stock is off.
         }
 
-        return (int)$this->productStock->getQty();
+        return $this->product && $this->productStock ? (int)$this->productStock->getQty() : 0;
     }
 }
