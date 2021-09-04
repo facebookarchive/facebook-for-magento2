@@ -347,6 +347,8 @@ class Builder
      */
     public function buildProductEntry(Product $product)
     {
+        $product->setCustomerGroupId(\Magento\Customer\Model\GroupManagement::NOT_LOGGED_IN_ID);
+
         $this->inventory->initInventoryForProduct($product);
 
         $productType = $this->trimAttribute(self::ATTR_PRODUCT_TYPE, $this->getCategoryPath($product));
