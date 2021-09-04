@@ -11,6 +11,7 @@ use Facebook\BusinessExtension\Model\Product\Feed\Builder\Inventory;
 use Facebook\BusinessExtension\Model\Product\Feed\Builder\Tools as BuilderTools;
 use Magento\Catalog\Api\Data\CategoryInterface;
 use Magento\Catalog\Model\Product;
+use Magento\Catalog\Model\Product\Type as ProductType;
 use Magento\Catalog\Model\ResourceModel\Category\CollectionFactory as CategoryCollectionFactory;
 use Magento\Framework\Exception\LocalizedException;
 
@@ -141,7 +142,13 @@ class Builder
      */
     protected function getProductPrice(Product $product)
     {
-        return $this->builderTools->formatPrice($product->getPrice());
+        $price = $product->getPrice();
+        // Prevent zero prices from configurable or grouped products.
+        if ($product->getTypeId() != ProductType::TYPE_SIMPLE) {
+            $price = $product->getPriceInfo()->getPrice('final_price')->getAmount()->getValue();
+        }
+
+        return $this->builderTools->formatPrice($price);
     }
 
     /**
@@ -150,7 +157,7 @@ class Builder
      */
     protected function getProductSalePrice(Product $product)
     {
-        if ($product->getRegularPrice() > $product->getFinalPrice()) {
+        if ($product->getFinalPrice() > 0 && $product->getRegularPrice() > $product->getFinalPrice()) {
             return $this->builderTools->formatPrice($product->getFinalPrice());
         }
 
