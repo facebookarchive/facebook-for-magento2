@@ -152,7 +152,11 @@ class Builder
      */
     protected function getProductSalePrice(Product $product)
     {
-        return $product->getSpecialPrice() ? $this->builderTools->formatPrice($product->getSpecialPrice()) : '';
+        if ($this->getRegularPrice() > $this->product->getFinalPrice()) {
+            return $this->builderTools->formatPrice($product->getFinalPrice());
+        }
+
+        return '';
     }
 
     /**
