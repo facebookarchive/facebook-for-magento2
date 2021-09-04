@@ -108,10 +108,6 @@ class Inventory
      */
     public function getInventory()
     {
-        if (!$this->productStock) {
-            return 0;
-        }
-
         if (!$this->productStock->getManageStock()) {
             return self::DEFAULT_IN_STOCK_QTY; // Fake Quantity to make product available if Manage Stock is off.
         }
