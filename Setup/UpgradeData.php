@@ -158,7 +158,7 @@ class UpgradeData implements UpgradeDataInterface
                 // verify if already installed before
                 if (!$eavSetup->getAttributeId(Product::ENTITY, $attrCode)) {
                     //Create the attribute
-                    $this->helper->log($attrCode . " not exist before, process it");
+                    // $this->helper->log($attrCode . " not exist before, process it");
                     //  attribute does not exist
                     // add a new attribute
                     // and assign it to the "FacebookAttributeSet" attribute set
