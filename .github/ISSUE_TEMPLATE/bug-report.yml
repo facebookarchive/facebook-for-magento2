@@ -41,7 +41,7 @@ body:
     id: logs
     attributes:
       label: Relevant log output
-      description: Please copy and paste any relevant log output. Use info tab page for logs (for version 1.4.4 onwards).
+      description: Please copy and paste any relevant log output. Use info tab page for logs (for version 1.4.3 onwards).
       render: shell
   - type: checkboxes
     id: terms
