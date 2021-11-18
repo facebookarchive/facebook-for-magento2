@@ -3,7 +3,7 @@
     <default>
         <facebook>
             <catalog_management>
-                <collections_sync>1</collections_sync>
+                <catalog_sync>1</catalog_sync>
             </catalog_management>
             <inventory_management>
                 <out_of_stock_threshold>0</out_of_stock_threshold>

@@ -44,7 +44,7 @@ class CategorySyncCron
 
     public function execute()
     {
-        if ($this->systemConfig->isActiveCollectionsSync() == true) {
+        if ($this->systemConfig->isActiveCatalogSync() == true) {
             $this->categoryCollection->pushAllCategoriesToFbCollections();
             return true;
         }
