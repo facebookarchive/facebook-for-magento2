@@ -91,7 +91,7 @@ class LogOrganization
     }
 
     public static function tailCustom($filepath, $lines) {
-        $f = fopen($filepath, "rb");
+        $f = fopen(BP . '/' . $filepath, "rb");
         if ($f === false) {
             return false;
         }
