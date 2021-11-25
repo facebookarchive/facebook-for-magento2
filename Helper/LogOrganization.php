@@ -19,6 +19,7 @@ class LogOrganization
         $arrayOfFiles = array("var/log/debug.log", "var/log/cron.log", "var/log/magento.cron.log", "var/log/system.log");
         $countCrit = 0;
 
+        $fp = null;
         foreach($arrayOfFiles as $value) {
             if (!file_exists($value)) {
                 continue;
@@ -71,7 +72,9 @@ class LogOrganization
 
             $countCrit = 0;
         }
-        fclose($fp);
+        if ($fp !== null) {
+            fclose($fp);
+        }
 
         $amuLogs = self::tailCustom("var/log/facebook-business-extension.log", 100);
         $amuLogsArr = explode("\n", $amuLogs);
