@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Copyright (c) Facebook, Inc. and its affiliates. All Rights Reserved
+# Copyright (c) Meta, Inc. and its affiliates. All Rights Reserved
 
 # Be sure to log in as the Magento files owner and browse to Magento root directory
 # Make this file executable with chmod +x install-facebook-business-extension.sh
