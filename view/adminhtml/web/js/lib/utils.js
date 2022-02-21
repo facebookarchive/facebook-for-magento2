@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016-present, Meta, Inc.
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
  * All rights reserved.
  *
  * This source code is licensed under the BSD-style license found in the
