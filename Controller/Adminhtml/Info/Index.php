@@ -1,4 +1,7 @@
 <?php
+/**
+ * Copyright (c) Meta Platforms, Inc. and affiliates. All Rights Reserved
+ */
 namespace Facebook\BusinessExtension\Controller\Adminhtml\Info;
 
 use Magento\Backend\App\Action;
