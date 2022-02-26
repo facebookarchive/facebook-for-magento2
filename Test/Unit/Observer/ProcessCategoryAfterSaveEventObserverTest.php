@@ -5,6 +5,8 @@
 
 namespace Facebook\BusinessExtension\Test\Unit\Observer;
 
+use Magento\Framework\Event;
+use PHPUnit\Framework\MockObject\MockObject;
 class ProcessCategoryAfterSaveEventObserverTest extends CommonTest
 {
 
@@ -23,7 +25,7 @@ class ProcessCategoryAfterSaveEventObserverTest extends CommonTest
      *
      * @return void
      */
-    public function tearDown()
+    public function tearDown(): void
     {
     }
 
@@ -32,11 +34,15 @@ class ProcessCategoryAfterSaveEventObserverTest extends CommonTest
      *
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->_category = $this->createMock(\Magento\Catalog\Model\Category::class);
-        $event = $this->createPartialMock(\Magento\Framework\Event::class, ['getCategory']);
+        /** @var Event|MockObject */
+        $event = $this->getMockBuilder(Event::class)
+            ->disableOriginalConstructor()
+            ->addMethods(['getCategory'])
+            ->getMock();
         $event->expects($this->once())->method('getCategory')->will($this->returnValue($this->_category));
         $this->_eventObserverMock = $this->createMock(\Magento\Framework\Event\Observer::class);
         $this->_eventObserverMock->expects($this->once())->method('getEvent')->will($this->returnValue($event));

@@ -29,7 +29,7 @@ class HeadTest extends \PHPUnit\Framework\TestCase
    *
    * @return void
    */
-    public function tearDown()
+    public function tearDown(): void
     {
     }
 
@@ -38,7 +38,7 @@ class HeadTest extends \PHPUnit\Framework\TestCase
    *
    * @return void
    */
-    public function setUp()
+    public function setUp(): void
     {
 
         $this->context = $this->createMock(\Magento\Framework\View\Element\Template\Context::class);

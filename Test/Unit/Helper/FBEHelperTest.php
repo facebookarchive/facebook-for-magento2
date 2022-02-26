@@ -46,7 +46,7 @@ class FBEHelperTest extends \PHPUnit\Framework\TestCase
    *
    * @return void
    */
-    public function tearDown()
+    public function tearDown(): void
     {
     }
 
@@ -55,7 +55,7 @@ class FBEHelperTest extends \PHPUnit\Framework\TestCase
    *
    * @return void
    */
-    public function setUp()
+    public function setUp(): void
     {
         $this->context = $this->createMock(Context::class);
         $this->objectManagerInterface = $this->createMock(ObjectManagerInterface::class);

@@ -18,7 +18,7 @@ class PurchaseTest extends CommonTest
    *
    * @return void
    */
-    public function tearDown()
+    public function tearDown(): void
     {
     }
 
@@ -27,7 +27,7 @@ class PurchaseTest extends CommonTest
    *
    * @return void
    */
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->purchaseObserver =

@@ -39,7 +39,7 @@ class ProcessProductAfterSaveEventObserverTest extends CommonTest
      *
      * @return void
      */
-    public function tearDown()
+    public function tearDown(): void
     {
     }
 
@@ -48,14 +48,18 @@ class ProcessProductAfterSaveEventObserverTest extends CommonTest
      *
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->store = $this->createMock(StoreInterface::class);
         $this->fbeHelper->expects($this->once())->method('getStore')->will($this->returnValue($this->store));
         $this->_product = $this->createMock(Product::class);
         $this->_product->expects($this->once())->method('getId')->will($this->returnValue("1234"));
-        $event = $this->createPartialMock(Event::class, ['getProduct']);
+        /** @var Event|MockObject */
+        $event = $this->getMockBuilder(Event::class)
+            ->disableOriginalConstructor()
+            ->addMethods(['getProduct'])
+            ->getMock();
         $event->expects($this->once())->method('getProduct')->will($this->returnValue($this->_product));
         $this->_eventObserverMock = $this->createMock(Observer::class);
         $this->_eventObserverMock->expects($this->once())->method('getEvent')->will($this->returnValue($event));
@@ -63,7 +67,8 @@ class ProcessProductAfterSaveEventObserverTest extends CommonTest
         $this->processProductAfterSaveEventObserver =
             new ProcessProductAfterSaveEventObserver(
                 $this->fbeHelper,
-                $this->_batchApi
+                $this->_batchApi,
+                $this->systemConfig
             );
     }
 

@@ -21,7 +21,7 @@ class ViewContentTest extends CommonTest
    *
    * @return void
    */
-    public function tearDown()
+    public function tearDown(): void
     {
     }
 
@@ -30,7 +30,7 @@ class ViewContentTest extends CommonTest
    *
    * @return void
    */
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->registry = $this->createMock(Registry::class);

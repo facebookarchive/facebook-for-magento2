@@ -10,7 +10,7 @@ use \Facebook\BusinessExtension\Cron\CategorySyncCron;
 use Facebook\BusinessExtension\Model\Feed\CategoryCollection;
 use Facebook\BusinessExtension\Model\System\Config as SystemConfig;
 
-class CronRunTest extends \PHPUnit\Framework\TestCase
+class CategorySyncCronTest extends \PHPUnit\Framework\TestCase
 {
 
     protected $categorySyncCron;
@@ -23,7 +23,7 @@ class CronRunTest extends \PHPUnit\Framework\TestCase
      *
      * @return void
      */
-    public function tearDown()
+    public function tearDown(): void
     {
     }
 
@@ -32,7 +32,7 @@ class CronRunTest extends \PHPUnit\Framework\TestCase
      *
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->fbeHelper = $this->createMock(FBEHelper::class);
         $this->categoryCollection = $this->createMock(CategoryCollection::class);
@@ -51,7 +51,7 @@ class CronRunTest extends \PHPUnit\Framework\TestCase
      */
     public function testNCronDisabled()
     {
-        $this->systemConfig->method('isActiveCollectionsSync')->willReturn(false);
+        $this->systemConfig->method('isActiveCatalogSync')->willReturn(false);
 
         $result = $this->categorySyncCron->execute();
 
@@ -65,7 +65,7 @@ class CronRunTest extends \PHPUnit\Framework\TestCase
      */
     public function testNCronEnabled()
     {
-        $this->systemConfig->method('isActiveCollectionsSync')->willReturn(true);
+        $this->systemConfig->method('isActiveCatalogSync')->willReturn(true);
 
         $result = $this->categorySyncCron->execute();
 

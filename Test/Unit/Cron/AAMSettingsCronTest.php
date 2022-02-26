@@ -10,7 +10,7 @@ use FacebookAds\Object\ServerSide\AdsPixelSettings;
 use \Facebook\BusinessExtension\Helper\FBEHelper;
 use \Facebook\BusinessExtension\Cron\AAMSettingsCron;
 
-class EventIdGeneratorTest extends \PHPUnit\Framework\TestCase
+class AAMSettingsCronTest extends \PHPUnit\Framework\TestCase
 {
 
     protected $aamSettingsCron;
@@ -21,7 +21,7 @@ class EventIdGeneratorTest extends \PHPUnit\Framework\TestCase
    *
    * @return void
    */
-    public function tearDown()
+    public function tearDown(): void
     {
     }
 
@@ -30,7 +30,7 @@ class EventIdGeneratorTest extends \PHPUnit\Framework\TestCase
    *
    * @return void
    */
-    public function setUp()
+    public function setUp(): void
     {
         $this->fbeHelper = $this->createMock(\Facebook\BusinessExtension\Helper\FBEHelper::class);
         $this->aamSettingsCron = new \Facebook\BusinessExtension\Cron\AAMSettingsCron($this->fbeHelper);

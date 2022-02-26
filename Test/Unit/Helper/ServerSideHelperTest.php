@@ -25,7 +25,7 @@ class ServerSideHelperTest extends TestCase
    *
    * @return void
    */
-    public function tearDown()
+    public function tearDown(): void
     {
     }
 
@@ -34,7 +34,7 @@ class ServerSideHelperTest extends TestCase
    *
    * @return void
    */
-    public function setUp()
+    public function setUp(): void
     {
         $this->fbeHelper = $this->createMock(FBEHelper::class);
         $this->aamFieldsExtractorHelper =
