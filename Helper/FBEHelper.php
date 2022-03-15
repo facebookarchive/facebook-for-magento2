@@ -152,12 +152,12 @@ class FBEHelper extends AbstractHelper
     /**
      * @return string
      */
-    public function getPartnerAgent()
+    public function getPartnerAgent($with_magento_version = false)
     {
         return sprintf(
             '%s-%s-%s',
             $this->getSource(),
-            $this->getMagentoVersion(),
+            $with_magento_version ? $this->getMagentoVersion() : '0.0.0',
             $this->getPluginVersion()
         );
     }
