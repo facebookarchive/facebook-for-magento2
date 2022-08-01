@@ -16,24 +16,25 @@ use Magento\Framework\Exception\LocalizedException;
 
 class Builder
 {
-    const ATTR_RETAILER_ID          = 'id';
-    const ATTR_ITEM_GROUP_ID        = 'item_group_id';
-    const ATTR_DESCRIPTION          = 'description';
-    const ATTR_RICH_DESCRIPTION     = 'rich_text_description';
-    const ATTR_URL                  = 'link';
-    const ATTR_IMAGE_URL            = 'image_link';
+    const ATTR_RETAILER_ID = 'id';
+    const ATTR_ITEM_GROUP_ID = 'item_group_id';
+    const ATTR_DESCRIPTION = 'description';
+    const ATTR_RICH_DESCRIPTION = 'rich_text_description';
+    const ATTR_URL = 'link';
+    const ATTR_IMAGE_URL = 'image_link';
     const ATTR_ADDITIONAL_IMAGE_URL = 'additional_image_link';
-    const ATTR_BRAND                = 'brand';
-    const ATTR_SIZE                 = 'size';
-    const ATTR_COLOR                = 'color';
-    const ATTR_CONDITION            = 'condition';
-    const ATTR_AVAILABILITY         = 'availability';
-    const ATTR_INVENTORY            = 'inventory';
-    const ATTR_PRICE                = 'price';
-    const ATTR_SALE_PRICE           = 'sale_price';
-    const ATTR_NAME                 = 'title';
-    const ATTR_PRODUCT_TYPE         = 'product_type';
-    const ATTR_PRODUCT_CATEGORY     = 'google_product_category';
+    const ATTR_BRAND = 'brand';
+    const ATTR_SIZE = 'size';
+    const ATTR_COLOR = 'color';
+    const ATTR_CONDITION = 'condition';
+    const ATTR_AVAILABILITY = 'availability';
+    const ATTR_INVENTORY = 'inventory';
+    const ATTR_PRICE = 'price';
+    const ATTR_SALE_PRICE = 'sale_price';
+    const ATTR_SALE_PRICE_EFFECTIVE_DATE = 'sale_price_effective_date';
+    const ATTR_NAME = 'title';
+    const ATTR_PRODUCT_TYPE = 'product_type';
+    const ATTR_PRODUCT_CATEGORY = 'google_product_category';
 
     /**
      * @var FBEHelper
@@ -141,7 +142,8 @@ class Builder
      */
     protected function getProductPrice(Product $product)
     {
-        return $this->builderTools->formatPrice($product->getPrice());
+        $price = $product->getPrice();
+        return $this->builderTools->formatPrice($price, $product->getStoreId());
     }
 
     /**
@@ -150,7 +152,35 @@ class Builder
      */
     protected function getProductSalePrice(Product $product)
     {
-        return $product->getSpecialPrice() ? $this->builderTools->formatPrice($product->getSpecialPrice()) : '';
+        if (!$product->getSpecialPrice()) {
+            return '';
+        }
+
+        $price = $product->getSpecialPrice();
+        return $this->builderTools->formatPrice($price, $product->getStoreId());
+    }
+
+    /**
+     * @param Product $product
+     * @return string
+     */
+    protected function getProductSalePriceEffectiveDate(Product $product)
+    {
+        $specialFromDate = $product->getSpecialFromDate();
+        $specialToDate = $product->getSpecialToDate();
+
+        $salePriceStartDate = '';
+        if ($specialFromDate) {
+            $salePriceStartDate = (new \DateTime($specialFromDate))->format('c');
+        }
+        $salePriceEndDate = '';
+        if ($specialToDate) {
+            $salePriceEndDate = (new \DateTime($specialToDate))->format('c');
+        }
+        if ($product->getSpecialPrice() && $salePriceStartDate || $salePriceEndDate) {
+            return sprintf("%s/%s", $salePriceStartDate, $salePriceEndDate);
+        }
+        return '';
     }
 
     /**
@@ -366,6 +396,7 @@ class Builder
             self::ATTR_CONDITION            => $this->getCondition($product),
             self::ATTR_PRICE                => $this->getProductPrice($product),
             self::ATTR_SALE_PRICE           => $this->getProductSalePrice($product),
+            self::ATTR_SALE_PRICE_EFFECTIVE_DATE => $this->getProductSalePriceEffectiveDate($product),
             self::ATTR_COLOR                => $this->getColor($product),
             self::ATTR_SIZE                 => $this->getSize($product),
             self::ATTR_URL                  => $this->getProductUrl($product),
