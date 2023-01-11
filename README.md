@@ -1,4 +1,4 @@
-
+### NOTE: This version will be upgraded in early 2023; please stay tuned for updates.
 # Facebook Business Extension For Magento2
 
 ## Facebook Connects Businesses with People
