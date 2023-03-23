@@ -3,7 +3,7 @@
   "description": "Facebook Business Extension for Magento 2",
   "type": "magento2-module",
   "license": "GPL-1.0-or-later",
-  "version": "1.4.6",
+  "version": "1.4.7",
   "require": {
     "facebook/php-business-sdk": ">=15.0.0"
   },
@@ -13,6 +13,10 @@
       "url": "https://github.com/facebookincubator/facebook-for-magento2"
     }
   ],
+  "conflict": {
+    "meta/meta-for-magento2": "*"
+  },
+  "abandoned": "meta/meta-for-magento2",
   "autoload": {
     "files": [ "registration.php" ],
     "psr-4": {
