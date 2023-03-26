@@ -9,6 +9,7 @@ use Facebook\BusinessExtension\Helper\AAMFieldsExtractorHelper;
 use Facebook\BusinessExtension\Helper\FBEHelper;
 use Facebook\BusinessExtension\Helper\MagentoDataHelper;
 use Facebook\BusinessExtension\Helper\ServerSideHelper;
+use Facebook\BusinessExtension\Model\System\Config as SystemConfig;
 use Magento\Framework\TestFramework\Unit\Helper\ObjectManager;
 use PHPUnit\Framework\TestCase;
 
@@ -18,6 +19,8 @@ abstract class CommonTest extends TestCase
     protected $magentoDataHelper;
 
     protected $fbeHelper;
+
+    protected $systemConfig;
 
     protected $objectManager;
 
@@ -30,7 +33,7 @@ abstract class CommonTest extends TestCase
    *
    * @return void
    */
-    public function tearDown()
+    public function tearDown(): void
     {
     }
 
@@ -39,7 +42,7 @@ abstract class CommonTest extends TestCase
    *
    * @return void
    */
-    public function setUp()
+    public function setUp(): void
     {
         $this->fbeHelper = $this->createMock(FBEHelper::class);
         $this->magentoDataHelper = $this->createMock(MagentoDataHelper::class);
@@ -55,6 +58,9 @@ abstract class CommonTest extends TestCase
         $this->fbeHelper->method('getAccessToken')->willReturn('');
         $this->fbeHelper->method('getPixelId')->willReturn('123');
         $this->magentoDataHelper->method('getCurrency')->willReturn('USD');
+
+        $this->systemConfig = $this->createMock(SystemConfig::class);
+        $this->systemConfig->method('isActiveCatalogSync')->willReturn(true);
     }
 
     public function assertEqualsCustomData($customDataArray, $customData)

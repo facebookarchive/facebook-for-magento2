@@ -29,7 +29,7 @@ class AAMFieldsExtractorHelperTest extends TestCase
    *
    * @return void
    */
-    public function setUp()
+    public function setUp(): void
     {
         $this->fbeHelper = $this->createMock(FBEHelper::class);
         $this->magentoDataHelper = $this->createMock(MagentoDataHelper::class);

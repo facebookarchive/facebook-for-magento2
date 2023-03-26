@@ -5,6 +5,7 @@
 
 namespace Facebook\BusinessExtension\Test\Unit\Observer;
 
+use Facebook\BusinessExtension\Model\Product\Feed\Method\BatchApi;
 use Facebook\BusinessExtension\Observer\ProcessProductAfterDeleteEventObserver;
 use Magento\Catalog\Model\Product;
 use Magento\Framework\Event;
@@ -29,7 +30,7 @@ class ProcessProductAfterDeleteEventObserverTest extends CommonTest
      *
      * @return void
      */
-    public function tearDown()
+    public function tearDown(): void
     {
     }
 
@@ -38,19 +39,29 @@ class ProcessProductAfterDeleteEventObserverTest extends CommonTest
      *
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->_product = $this->createMock(Product::class);
         $this->_product->expects($this->atLeastOnce())->method('getId')->will($this->returnValue("1234"));
         $this->_product->expects($this->never())->method('getSku');
 
-        $event = $this->createPartialMock(Event::class, ['getProduct']);
+        /** @var Event|MockObject */
+        $event = $this->getMockBuilder(Event::class)
+            ->disableOriginalConstructor()
+            ->addMethods(['getProduct'])
+            ->getMock();
         $event->expects($this->once())->method('getProduct')->will($this->returnValue($this->_product));
+
         $this->_eventObserverMock = $this->createMock(Observer::class);
         $this->_eventObserverMock->expects($this->once())->method('getEvent')->will($this->returnValue($event));
+        $this->batchApi = $this->createMock(BatchApi::class);
         $this->processProductAfterDeleteEventObserver =
-            new ProcessProductAfterDeleteEventObserver($this->fbeHelper);
+            new ProcessProductAfterDeleteEventObserver(
+                $this->fbeHelper,
+                $this->batchApi,
+                $this->systemConfig
+            );
     }
 
     public function testExcution()
