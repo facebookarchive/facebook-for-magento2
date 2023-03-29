@@ -4,6 +4,7 @@
     <body>
         <referenceBlock name="head.additional">
             <block class="Facebook\BusinessExtension\Block\Pixel\Head"
+                   ifconfig="facebook_business_extension/general/enable"
                    name="fbe.pixel.header"
                    template="Facebook_BusinessExtension::pixel/head.phtml"
                    before="-" />
