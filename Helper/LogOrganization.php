@@ -70,8 +70,9 @@ class LogOrganization
             }
 
             $countCrit = 0;
+
+            fclose($fp);
         }
-        fclose($fp);
 
         $amuLogs = self::tailCustom("var/log/facebook-business-extension.log", 100);
         $amuLogsArr = explode("\n", $amuLogs);
