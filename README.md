@@ -1,5 +1,7 @@
-### NOTE: This version will be upgraded in early 2023; please stay tuned for updates.
 # Facebook Business Extension For Magento2
+
+### :warning: NOTE: This version is deprecated and archived. Check out Meta's new extension on [Magento Marketplace](https://marketplace.magento.com/meta-meta-for-magento2.html). To contribute or report issues, visit https://github.com/magento/meta-for-magento2.
+
 
 ## Facebook Connects Businesses with People
 
