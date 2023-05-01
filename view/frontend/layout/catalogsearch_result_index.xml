@@ -4,6 +4,7 @@
     <body>
         <referenceContainer name="before.body.end">
             <block class="Facebook\BusinessExtension\Block\Pixel\Search"
+                   ifconfig="facebook_business_extension/general/enable"
                    name="fbe.pixel.search"
                    template="Facebook_BusinessExtension::pixel/search.phtml"
                    before="-" />

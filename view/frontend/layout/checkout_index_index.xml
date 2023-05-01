@@ -4,6 +4,7 @@
     <body>
         <referenceContainer name="before.body.end">
             <block class="Facebook\BusinessExtension\Block\Pixel\InitiateCheckout"
+                   ifconfig="facebook_business_extension/general/enable"
                    name="fbe.pixel.initate_checkout"
                    template="Facebook_BusinessExtension::pixel/initiate_checkout.phtml"
                    before="-" />

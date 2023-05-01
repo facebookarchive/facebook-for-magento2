@@ -4,6 +4,7 @@
     <body>
         <referenceContainer name="before.body.end">
             <block class="Facebook\BusinessExtension\Block\Pixel\Purchase"
+                   ifconfig="facebook_business_extension/general/enable"
                    name="fbe.pixel.purchase"
                    template="Facebook_BusinessExtension::pixel/purchase.phtml"
                    before="-" />
