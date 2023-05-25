@@ -33,7 +33,7 @@ class Purchase extends Common
         $order = $this->fbeHelper->getObject(\Magento\Checkout\Model\Session::class)->getLastRealOrder();
         /** @var Order $order */
         if ($order) {
-            $subtotal = $order->getSubTotal();
+            $subtotal = $order->getGrandTotal();
             if ($subtotal) {
                 $priceHelper = $this->fbeHelper->getObject(\Magento\Framework\Pricing\Helper\Data::class);
                 return $priceHelper->currency($subtotal, false, false);
