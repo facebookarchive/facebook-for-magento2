@@ -54,7 +54,8 @@ class LogOrganization
                 }
                 $pos--;
             }
-
+            fclose($fp);
+            
             if (substr($currentLine, 0, 3) == "[20") {
                 $time = strtotime(substr($currentLine, 1, 20));
                 if ($time > strtotime('-7 day')) {
@@ -71,7 +72,6 @@ class LogOrganization
 
             $countCrit = 0;
         }
-        fclose($fp);
 
         $amuLogs = self::tailCustom("var/log/facebook-business-extension.log", 100);
         $amuLogsArr = explode("\n", $amuLogs);
@@ -88,7 +88,7 @@ class LogOrganization
     }
 
     public static function tailCustom($filepath, $lines) {
-        $f = fopen($filepath, "rb");
+        $f = fopen(BP . '/' . $filepath, "rb");
         if ($f === false) {
             return false;
         }
